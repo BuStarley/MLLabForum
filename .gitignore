@@ -1,0 +1,74 @@
+# Environment
+.env
+.env.local
+.env.*.local
+.env.example
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+
+# Docker
+*.log
+volumes/
+data/
+docker-compose.override.yml
+
+# SSL certificates (security)
+infrastructure/nginx/ssl/*.pem
+infrastructure/nginx/ssl/*.crt
+infrastructure/nginx/ssl/*.key
+
+# Build artifacts
+*.jar
+*.war
+*.class
+build/
+target/
+out/
+
+# Kotlin
+.klib
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env/
+.venv/
+
+# Logs
+logs/
+*.log
+
+# Testing
+.coverage
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.pid
+*.swp
+*.swo
+
+# Scripts temp (если создаются динамически)
+scripts/*.tmp
+
+# Grafana (локальные изменения)
+infrastructure/grafana/data/
+
+# Prometheus (локальные данные)
+infrastructure/prometheus/data/
+
+# MinIO (локальные данные)
+infrastructure/minio/data/

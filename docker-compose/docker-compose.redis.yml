@@ -1,0 +1,85 @@
+services:
+  auth-redis:
+    image: redis:7-alpine
+    container_name: mllab-auth-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ../infrastructure/redis/auth-redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-auth-data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  profile-redis:
+    image: redis:7-alpine
+    container_name: mllab-profile-redis
+    ports:
+      - "6381:6379"
+    volumes:
+      - ../infrastructure/redis/profile-redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-profile-data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  post-redis:
+    image: redis:7-alpine
+    container_name: mllab-post-redis
+    ports:
+      - "6382:6379"
+    volumes:
+      - ../infrastructure/redis/post-redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-post-data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ml-redis:
+    image: redis:7-alpine
+    container_name: mllab-ml-redis
+    ports:
+      - "6383:6379"
+    volumes:
+      - ../infrastructure/redis/ml-redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-ml-data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notify-redis:
+    image: redis:7-alpine
+    container_name: mllab-notify-redis
+    ports:
+      - "6384:6379"
+    volumes:
+      - ../infrastructure/redis/notify-redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-notify-data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

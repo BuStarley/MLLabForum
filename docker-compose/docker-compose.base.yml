@@ -1,0 +1,27 @@
+networks:
+  mllab-network:
+    driver: bridge
+
+volumes:
+  # PostgreSQL
+  postgres-auth-data:
+  postgres-profile-data:
+  postgres-posts-data:
+  postgres-analytics-data:
+  postgres-ml-data:
+  postgres-notify-data:
+  postgres-registry-data:
+
+  # Redis
+  redis-auth-data:
+  redis-profile-data:
+  redis-post-data:
+  redis-ml-data:
+  redis-notify-data:
+
+  # MinIO
+  minio-data:
+
+  # Monitoring
+  prometheus-data:
+  grafana-data:

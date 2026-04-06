@@ -1,0 +1,8 @@
+include:
+  - docker-compose.base.yml
+  - docker-compose.databases.yml
+  - docker-compose.redis.yml
+  - docker-compose.kafka.yml
+  - docker-compose.storage.yml
+  - docker-compose.monitoring.yml
+  - docker-compose.infrastructure.yml

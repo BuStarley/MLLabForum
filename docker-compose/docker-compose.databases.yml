@@ -1,0 +1,133 @@
+services:
+  auth-db:
+    image: postgres:16-alpine
+    container_name: mllab-auth-db
+    environment:
+      POSTGRES_DB: mllab_auth
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-auth-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_auth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  profile-db:
+    image: postgres:16-alpine
+    container_name: mllab-profile-db
+    environment:
+      POSTGRES_DB: mllab_profile
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-profile-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_profile"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  post-db:
+    image: postgres:16-alpine
+    container_name: mllab-post-db
+    environment:
+      POSTGRES_DB: mllab_posts
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres-posts-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_posts"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  analytics-db:
+    image: postgres:16-alpine
+    container_name: mllab-analytics-db
+    environment:
+      POSTGRES_DB: mllab_analytics
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres-analytics-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_analytics"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ml-db:
+    image: postgres:16-alpine
+    container_name: mllab-ml-db
+    environment:
+      POSTGRES_DB: mllab_ml
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5437:5432"
+    volumes:
+      - postgres-ml-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_ml"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notify-db:
+    image: postgres:16-alpine
+    container_name: mllab-notify-db
+    environment:
+      POSTGRES_DB: mllab_notifications
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5438:5432"
+    volumes:
+      - postgres-notify-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_notifications"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  registry-db:
+    image: postgres:16-alpine
+    container_name: mllab-registry-db
+    environment:
+      POSTGRES_DB: mllab_registry
+      POSTGRES_USER: mllab_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5439:5432"
+    volumes:
+      - postgres-registry-data:/var/lib/postgresql/data
+    networks:
+      - mllab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mllab_user -d mllab_registry"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

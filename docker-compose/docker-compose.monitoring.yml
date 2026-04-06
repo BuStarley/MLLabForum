@@ -1,0 +1,40 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: mllab-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../infrastructure/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - mllab-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: mllab-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - ../infrastructure/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - grafana-data:/var/lib/grafana
+    networks:
+      - mllab-network
+
+  loki:
+    image: grafana/loki:latest
+    container_name: mllab-loki
+    ports:
+      - "3100:3100"
+    networks:
+      - mllab-network
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: mllab-jaeger
+    ports:
+      - "16686:16686"
+    networks:
+      - mllab-network
