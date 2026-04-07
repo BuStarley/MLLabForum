@@ -31,7 +31,7 @@ services:
       retries: 5
 
   eureka-server:
-    image: mllab/eureka-server:latest
+    image: bustarley/eureka-server:latest
     container_name: mllab-eureka-server
     ports:
       - "8761:8761"
@@ -48,7 +48,7 @@ services:
       start_period: 60s
 
   config-server:
-    image: mllab/config-server:latest
+    image: bustarley/config-server:latest
     container_name: mllab-config-server
     ports:
       - "8888:8888"
