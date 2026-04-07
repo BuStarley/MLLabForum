@@ -25,6 +25,12 @@ if [ ! -d "$COMPOSE_DIR" ]; then
     exit 1
 fi
 
+# Check if docker-compose is available
+if ! command -v docker-compose &> /dev/null; then
+    echo -e "${RED}Error: docker-compose not found${NC}"
+    exit 1
+fi
+
 cd "$COMPOSE_DIR"
 
 # 1. Validate docker-compose files
@@ -93,26 +99,32 @@ check_port 80 "NGINX"
 
 echo ""
 
-# 5. Check HTTP endpoints
+# 5. Check HTTP endpoints with retry
 echo -e "${YELLOW}[5/6] Checking HTTP endpoints...${NC}"
 
-check_http() {
+check_http_with_retry() {
     local url=$1
     local name=$2
-    if curl -s -f -o /dev/null --max-time 5 "$url" 2>/dev/null; then
-        echo -e "  ${GREEN}✓${NC} $name"
-        return 0
-    else
-        echo -e "  ${RED}✗${NC} $name"
-        return 1
-    fi
+    local max_attempts=5
+    local attempt=1
+
+    while [ $attempt -le $max_attempts ]; do
+        if curl -s -f -o /dev/null --max-time 5 "$url" 2>/dev/null; then
+            echo -e "  ${GREEN}✓${NC} $name"
+            return 0
+        fi
+        sleep 2
+        attempt=$((attempt + 1))
+    done
+    echo -e "  ${RED}✗${NC} $name"
+    return 1
 }
 
-check_http "http://localhost:9090" "Prometheus"
-check_http "http://localhost:3000" "Grafana"
-check_http "http://localhost:8025" "MailHog"
-check_http "http://localhost:9001" "MinIO Console"
-check_http "http://localhost" "NGINX"
+check_http_with_retry "http://localhost:9090" "Prometheus"
+check_http_with_retry "http://localhost:3000" "Grafana"
+check_http_with_retry "http://localhost:8025" "MailHog"
+check_http_with_retry "http://localhost:9001" "MinIO Console"
+check_http_with_retry "http://localhost" "NGINX"
 
 echo ""
 
