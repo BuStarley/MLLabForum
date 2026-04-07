@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-aplha] - platform-1 - 2026-04-07
+
+### Добавлено
+- **Platform Kotlin** с современным стеком:
+  - Spring Boot 4.0.5, Kotlin 2.3.0, Java 25
+  - Gradle 9.6 с configuration cache
+  - Type-safe project accessors
+  - pluginManagement с правильными репозиториями
+- Базовая структура для Kotlin-сервисов
+- Gradle wrapper для унифицированной сборки
+
+
 ## [0.2.0-alpha] - Infrastructure-2 - 2026-04-07
 
 ### Добавлено
