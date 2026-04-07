@@ -75,6 +75,8 @@ if [ $? -eq 0 ]; then
     echo -e "  Redis ml-redis:         ${GREEN}localhost:6383${NC}"
     echo -e "  Redis notify-redis:     ${GREEN}localhost:6384${NC}"
     echo -e "  Kafka:                  ${GREEN}localhost:9092${NC}"
+    echo -e "  Eureka Server:          ${GREEN}http://localhost:8761${NC}"
+    echo -e "  Config Server:          ${GREEN}http://localhost:8888${NC}"
     echo -e "  MinIO:                  ${GREEN}http://localhost:9001${NC} (minioadmin/minioadmin)"
     echo -e "  Prometheus:             ${GREEN}http://localhost:9090${NC}"
     echo -e "  Grafana:                ${GREEN}http://localhost:3000${NC} (admin/admin)"

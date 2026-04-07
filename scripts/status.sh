@@ -84,6 +84,8 @@ check_tcp() {
 }
 
 # Infrastructure services
+check_http "http://localhost:8761" "Eureka Server (8761)"
+check_http "http://localhost:8888/actuator/health" "Config Server (8888)"
 check_http "http://localhost:9090" "Prometheus (9090)"
 check_http "http://localhost:3000" "Grafana (3000)"
 check_http "http://localhost:8025" "MailHog (8025)"

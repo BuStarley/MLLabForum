@@ -72,6 +72,10 @@ check_port() {
     fi
 }
 
+# Eureka and Config Server
+check_port 8761 "Eureka Server"
+check_port 8888 "Config Server"
+
 # PostgreSQL databases
 check_port 5433 "PostgreSQL auth-db"
 check_port 5434 "PostgreSQL profile-db"
@@ -120,6 +124,8 @@ check_http_with_retry() {
     return 1
 }
 
+check_http_with_retry "http://localhost:8761" "Eureka Server"
+check_http_with_retry "http://localhost:8888/actuator/health" "Config Server"
 check_http_with_retry "http://localhost:9090" "Prometheus"
 check_http_with_retry "http://localhost:3000" "Grafana"
 check_http_with_retry "http://localhost:8025" "MailHog"

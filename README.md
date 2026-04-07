@@ -15,14 +15,16 @@ cp .env.example .env
 
 ## Доступ после запуска:
 
-| Сервис | URL | Логин/пароль |
-|--------|-----|--------------|
-| MinIO Console | http://localhost:9001 | minioadmin / minioadmin |
-| Prometheus | http://localhost:9090 | - |
-| Grafana | http://localhost:3000 | admin / admin |
-| Jaeger | http://localhost:16686 | - |
-| MailHog | http://localhost:8025 | - (web интерфейс для писем) |
-| NGINX | http://localhost | - (заглушка "Infrastructure is running") |
+| Сервис         | URL                    | Логин/пароль |
+|----------------|------------------------|--------------|
+| Eureka Server	 | http://localhost:8761  | 	-                     |
+| Config Server	 | http://localhost:8888  | 	-                     |
+| MinIO Console  | http://localhost:9001  | minioadmin / minioadmin |
+| Prometheus     | http://localhost:9090  | - |
+| Grafana        | http://localhost:3000  | admin / admin |
+| Jaeger         | http://localhost:16686 | - |
+| MailHog        | http://localhost:8025  | - (web интерфейс для писем) |
+| NGINX          | http://localhost       | - (заглушка "Infrastructure is running") |
 
 ## Скрипты управления
 

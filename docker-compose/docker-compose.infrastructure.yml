@@ -29,3 +29,42 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+
+  eureka-server:
+    image: mllab/eureka-server:latest
+    container_name: mllab-eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SERVER_PORT: 8761
+    networks:
+      - mllab-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  config-server:
+    image: mllab/config-server:latest
+    container_name: mllab-config-server
+    ports:
+      - "8888:8888"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SERVER_PORT: 8888
+      CONFIG_GIT_URI: https://github.com/BuStarley/mllab-config
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - mllab-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
