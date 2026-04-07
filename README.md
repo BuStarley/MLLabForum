@@ -10,7 +10,7 @@ MLLabForum — платформа для ML/AI сообщества, объед�
 git clone https://github.com/BuStarley/MLLabForum.git
 cd MLLabForum
 cp .env.example .env
-docker-compose -f docker-compose/docker-compose.yml up -d
+./scripts/start.sh
 ```
 
 ## Доступ после запуска:
@@ -22,4 +22,18 @@ docker-compose -f docker-compose/docker-compose.yml up -d
 | Grafana | http://localhost:3000 | admin / admin |
 | Jaeger | http://localhost:16686 | - |
 | MailHog | http://localhost:8025 | - (web интерфейс для писем) |
+| NGINX | http://localhost | - (заглушка "Infrastructure is running") |
+
+## Скрипты управления
+
+|Скрипт| 	Назначение                |
+|-|----------------------------|
+|./scripts/start.sh	| Запуск всей инфраструктуры |
+|./scripts/stop.sh	| Остановка всех сервисов    |
+|./scripts/status.sh|	Показать статус и healthcheck|
+|./scripts/test/test-infra.sh|	Полное тестирование инфраструктуры|
+
+## CI/CD (GitHub Actions)
+
+Автоматический пайплайн запускается при push в main и pull request'ах:
 
